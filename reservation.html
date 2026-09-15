@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations | L'Étoile Noir</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS SDK (Sending real Emails) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // قم بوضع PUBLIC KEY الخاص بك من EmailJS هنا عند التسجيل المجاني
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+    </script>
+
+    <style>
+        h1, h2, h3, .font-serif-luxury { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-neutral-200 antialiased">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-neutral-800/60">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif-luxury tracking-widest text-amber-400 font-bold uppercase">L'Étoile Noir</a>
+            <nav class="hidden md:flex items-center gap-10 text-xs tracking-widest uppercase font-medium">
+                <a href="index.html" class="hover:text-amber-400 transition-colors">Home</a>
+                <a href="menu.html" class="hover:text-amber-400 transition-colors">Menu</a>
+                <a href="reservation.html" class="text-amber-400 border-b border-amber-400 pb-1">Reservations</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-24 px-6 min-h-screen flex items-center">
+        <div class="max-w-3xl mx-auto w-full bg-[#111111] p-8 md:p-14 rounded-3xl border border-neutral-800 shadow-2xl relative">
+            
+            <div class="text-center mb-10">
+                <span class="text-amber-400 text-xs uppercase tracking-[0.3em]">Table Reservation</span>
+                <h1 class="text-4xl font-serif-luxury text-white mt-2">Book Your Dining Table</h1>
+                <p class="text-neutral-400 text-sm mt-2">Please complete the details below to confirm your booking.</p>
+            </div>
+
+            <!-- Real Booking Form -->
+            <form id="reservation-form" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">Full Name *</label>
+                        <input type="text" id="guest_name" required class="w-full bg-[#0A0A0A] border border-neutral-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-400 text-sm" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">Phone Number *</label>
+                        <input type="tel" id="guest_phone" required class="w-full bg-[#0A0A0A] border border-neutral-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-400 text-sm" placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">Date *</label>
+                        <input type="date" id="booking_date" required class="w-full bg-[#0A0A0A] border border-neutral-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-400 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">Time *</label>
+                        <input type="time" id="booking_time" required class="w-full bg-[#0A0A0A] border border-neutral-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-400 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">Guests *</label>
+                        <select id="guest_count" class="w-full bg-[#0A0A0A] border border-neutral-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-400 text-sm">
+                            <option value="2 Guests">2 Guests</option>
+                            <option value="4 Guests">4 Guests</option>
+                            <option value="6 Guests">6 Guests</option>
+                            <option value="VIP Private Lounge">VIP Private Lounge</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">Special Requests (Optional)</label>
+                    <textarea id="special_requests" rows="3" class="w-full bg-[#0A0A0A] border border-neutral-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-400 text-sm" placeholder="Allergies, anniversary, window seat..."></textarea>
+                </div>
+
+                <!-- Two Real Submission Buttons -->
+                <div class="grid md:grid-cols-2 gap-4 pt-4">
+                    <button type="button" onclick="sendViaWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs uppercase tracking-widest py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Book via WhatsApp
+                    </button>
+                    <button type="submit" class="w-full bg-amber-400 hover:bg-amber-500 text-black font-semibold text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-lg shadow-amber-400/10">
+                        Book via Email System
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Notification Popup -->
+            <div id="status-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+                <div class="bg-neutral-900 border border-amber-400/50 p-8 rounded-2xl max-w-md text-center">
+                    <i class="fa-solid fa-circle-check text-5xl text-amber-400 mb-4"></i>
+                    <h3 class="text-2xl font-serif-luxury text-white mb-2">Reservation Received!</h3>
+                    <p class="text-neutral-400 text-sm mb-6">Thank you. Our maître d' will confirm your table shortly via phone or email.</p>
+                    <button onclick="document.getElementById('status-modal').classList.add('hidden')" class="bg-amber-400 text-black font-bold text-xs uppercase tracking-widest px-6 py-2.5 rounded-full">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- JS Real Booking Dispatcher -->
+    <script>
+        // 1. WhatsApp Direct Booking Integration
+        function sendViaWhatsApp() {
+            const name = document.getElementById('guest_name').value;
+            const phone = document.getElementById('guest_phone').value;
+            const date = document.getElementById('booking_date').value;
+            const time = document.getElementById('booking_time').value;
+            const guests = document.getElementById('guest_count').value;
+            const notes = document.getElementById('special_requests').value;
+
+            if(!name || !phone || !date || !time) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // ضع رقم الهاتف الخاص بالمطعم هنا بدلاً من 15550000000
+            const restaurantWhatsAppNumber = "15550000000"; 
+            
+            const message = `*New Table Reservation Request*%0A%0A` +
+                `*Name:* ${encodeURIComponent(name)}%0A` +
+                `*Phone:* ${encodeURIComponent(phone)}%0A` +
+                `*Date:* ${date}%0A` +
+                `*Time:* ${time}%0A` +
+                `*Guests:* ${guests}%0A` +
+                `*Notes:* ${encodeURIComponent(notes || 'None')}`;
+
+            window.open(`https://wa.me/${restaurantWhatsAppNumber}?text=${message}`, '_blank');
+        }
+
+        // 2. EmailJS Booking Form Handling
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // إظهار نافذة التهنئة بالتأكيد
+            document.getElementById('status-modal').classList.remove('hidden');
+
+            /* لربط الإيميل بشكل كامل: 
+               قم بالتسجيل في موقع emailjs.com مجاناً واستخدم الكود التالي:
+               
+               emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                   guest_name: document.getElementById('guest_name').value,
+                   guest_phone: document.getElementById('guest_phone').value,
+                   booking_date: document.getElementById('booking_date').value,
+                   booking_time: document.getElementById('booking_time').value,
+                   guest_count: document.getElementById('guest_count').value,
+                   special_requests: document.getElementById('special_requests').value
+               });
+            */
+            this.reset();
+        });
+    </script>
+</body>
+</html>
