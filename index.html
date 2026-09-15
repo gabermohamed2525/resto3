@@ -1,200 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Étoile Noir | Fine Dining & Gastronomy</title>
-    <!-- Tailwind CSS -->
+    <title>NOIR & FIRE | تجربة الطعام والنار</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Luxury Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        h1, h2, h3, h4, .font-serif-luxury { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Cairo', sans-serif; }
+        .font-brand { font-family: 'Syne', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #FF6B35 0%, #F7C59F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="bg-[#0A0A0A] text-neutral-200 antialiased selection:bg-amber-500 selection:text-black">
+<body class="bg-[#0D0D11] text-[#E4E4E8] selection:bg-[#FF6B35] selection:text-white">
 
-    <!-- Navigation Header -->
-    <header class="fixed w-full top-0 z-50 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-neutral-800/60">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-serif-luxury tracking-widest text-amber-400 font-bold uppercase">
-                L'Étoile Noir
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-[#0D0D11]/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF6B35] to-[#E84A5F] flex items-center justify-center text-white text-xl font-bold font-brand">N</span>
+                <span class="text-2xl font-black font-brand text-white">NOIR <span class="text-[#FF6B35]">&</span> FIRE</span>
             </a>
-
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-10 text-xs tracking-widest uppercase font-medium">
-                <a href="index.html" class="text-amber-400 border-b border-amber-400 pb-1">Home</a>
-                <a href="menu.html" class="hover:text-amber-400 transition-colors">Menu</a>
-                <a href="reservation.html" class="hover:text-amber-400 transition-colors">Reservations</a>
-                <a href="#about" class="hover:text-amber-400 transition-colors">Our Story</a>
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+                <a href="index.html" class="text-[#FF6B35]">الرئيسية</a>
+                <a href="about.html" class="hover:text-[#FF6B35] transition-colors">عن المطعم</a>
+                <a href="menu.html" class="hover:text-[#FF6B35] transition-colors">قائمة الطعام</a>
+                <a href="reservation.html" class="hover:text-[#FF6B35] transition-colors">الحجز والمناسبات</a>
+                <a href="contact.html" class="hover:text-[#FF6B35] transition-colors">اتصل بنا</a>
             </nav>
-
-            <a href="reservation.html" class="hidden md:inline-block border border-amber-400/50 text-amber-400 hover:bg-amber-400 hover:text-black text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-full transition-all duration-300">
-                Book a Table
+            <a href="https://wa.me/201025134834?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%20%D8%A7%D9%84%D9%81%D9%88%D8%B1%D9%8A" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B35] to-[#E84A5F] text-white font-bold text-xs px-6 py-3 rounded-full shadow-lg shadow-[#FF6B35]/20">
+                <i class="fa-brands fa-whatsapp text-base"></i> واتساب مباشر
             </a>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-btn" class="md:hidden text-amber-400 text-2xl">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <button id="menu-toggle" class="lg:hidden text-2xl text-white"><i class="fa-solid fa-bars"></i></button>
         </div>
-
-        <!-- Mobile Drawer -->
-        <div id="mobile-drawer" class="hidden md:hidden bg-neutral-900 border-b border-neutral-800 px-6 py-6 space-y-4 text-center text-sm uppercase tracking-wider">
-            <a href="index.html" class="block text-amber-400">Home</a>
-            <a href="menu.html" class="block hover:text-amber-400">Menu</a>
-            <a href="reservation.html" class="block hover:text-amber-400">Reservations</a>
-            <a href="reservation.html" class="inline-block mt-4 bg-amber-400 text-black font-bold px-6 py-2 rounded-full">Book Now</a>
+        <div id="mobile-nav" class="hidden lg:hidden bg-[#13131A] border-b border-white/10 px-6 py-6 space-y-4 text-center font-semibold">
+            <a href="index.html" class="block text-[#FF6B35]">الرئيسية</a>
+            <a href="about.html" class="block">عن المطعم</a>
+            <a href="menu.html" class="block">قائمة الطعام</a>
+            <a href="reservation.html" class="block">الحجز والمناسبات</a>
+            <a href="contact.html" class="block">اتصل بنا</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1920" class="w-full h-full object-cover filter brightness-50 contrast-125" alt="Fine Dining">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent"></div>
-        </div>
-
-        <div class="relative z-10 text-center max-w-4xl px-6">
-            <span class="text-amber-400 tracking-[0.3em] uppercase text-xs font-semibold mb-4 block">Michelin Star Culinary Art</span>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif-luxury font-normal text-white mb-6 leading-tight">
-                Taste The Extraordinary
-            </h1>
-            <p class="text-neutral-300 text-base md:text-lg max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                An unforgettable journey through contemporary French cuisine, crafted with rare seasonal ingredients and unmatched passion.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-5 justify-center">
-                <a href="reservation.html" class="bg-amber-400 hover:bg-amber-500 text-black font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all shadow-lg shadow-amber-400/10">
-                    Reserve Your Experience
-                </a>
-                <a href="menu.html" class="border border-neutral-600 hover:border-amber-400 text-white hover:text-amber-400 text-xs font-semibold uppercase tracking-widest px-8 py-4 rounded-full transition-all">
-                    Explore Menu
-                </a>
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF6B35]/20 rounded-full blur-[130px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+                <span class="inline-block border border-[#FF6B35]/30 bg-[#FF6B35]/10 text-[#FF6B35] text-xs font-bold px-4 py-1.5 rounded-full mb-6">
+                    🔥 تجربة الشواء الناري الأولى من نوعها
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
+                    حيث يلتقي الشغف <br><span class="gradient-text">برائحة جمر الحطب.</span>
+                </h1>
+                <p class="text-neutral-400 text-base md:text-lg mb-8 leading-relaxed">
+                    نقدم لك أرقى القطعيات المعتقة والمأكولات البحرية الطازجة المشوية على فحم الخشب الطبيعي وسط أجواء فاخرة وموسيقى حية.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="reservation.html" class="bg-gradient-to-r from-[#FF6B35] to-[#E84A5F] text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-[#FF6B35]/30 hover:scale-105 transition-all">
+                        احجز طاولتك الآن
+                    </a>
+                    <a href="menu.html" class="bg-white/5 border border-white/10 text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-all">
+                        استكشف قائمة المأكولات
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1000" class="w-full h-[500px] object-cover" alt="Noir Fire Grill">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Chef's Showcase Section -->
-    <section id="about" class="py-28 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="relative">
-                <div class="absolute -inset-4 border border-amber-400/30 rounded-2xl transform -rotate-2"></div>
-                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=800" class="relative rounded-xl shadow-2xl object-cover w-full h-[500px]" alt="Executive Chef">
+    <!-- Counter Stats -->
+    <section class="py-16 bg-[#13131A] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div>
+                <p class="text-4xl font-black text-[#FF6B35]">100%</p>
+                <p class="text-xs text-neutral-400 mt-2 font-bold uppercase">لحوم أنغوس معتقة</p>
             </div>
             <div>
-                <span class="text-amber-400 text-xs uppercase tracking-[0.2em]">Our Heritage</span>
-                <h2 class="text-4xl md:text-5xl font-serif-luxury my-4 text-white">Culinary Precision & Passion</h2>
-                <p class="text-neutral-400 leading-relaxed mb-6 font-light">
-                    Founded in 2012 by Chef Antoine Laurent, L'Étoile Noir represents the pinnacle of modern gastronomy. Every plate is a carefully composed masterpiece, fusing classical technique with daring innovation.
-                </p>
-                <div class="grid grid-cols-2 gap-6 pt-6 border-t border-neutral-800">
-                    <div>
-                        <p class="text-3xl font-serif-luxury text-amber-400">3 Stars</p>
-                        <p class="text-xs uppercase text-neutral-500 mt-1">Michelin Guide</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl font-serif-luxury text-amber-400">100%</p>
-                        <p class="text-xs uppercase text-neutral-500 mt-1">Organic Organic Sourced</p>
-                    </div>
-                </div>
+                <p class="text-4xl font-black text-[#FF6B35]">15+</p>
+                <p class="text-xs text-neutral-400 mt-2 font-bold uppercase">شيف وطاهي محترف</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-[#FF6B35]">25,000+</p>
+                <p class="text-xs text-neutral-400 mt-2 font-bold uppercase">عميل سعيد سنويًا</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-[#FF6B35]">4.9 ★</p>
+                <p class="text-xs text-neutral-400 mt-2 font-bold uppercase">تقييم الزوار</p>
             </div>
         </div>
     </section>
 
-    <!-- Signature Dishes Showcase -->
-    <section class="py-28 bg-neutral-950/60 border-y border-neutral-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-xl mx-auto mb-20">
-                <span class="text-amber-400 text-xs uppercase tracking-[0.3em]">Gastronomic Highlights</span>
-                <h2 class="text-4xl font-serif-luxury text-white mt-2">Signature Creations</h2>
+    <!-- FAQ Section -->
+    <section class="py-24 max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <span class="text-[#FF6B35] text-xs font-bold uppercase">كل ما تريد معرفته</span>
+            <h2 class="text-4xl font-black text-white mt-2">الأسئلة الشائعة</h2>
+        </div>
+        <div class="space-y-6">
+            <div class="bg-[#14141C] p-6 rounded-2xl border border-white/5">
+                <h3 class="text-lg font-bold text-white mb-2">ما هي مواعيد العمل الرسمية؟</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">نستقبلكم يومياً من الساعة 1:00 ظهراً وحتى الساعة 2:00 صباحاً.</p>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Dish Card 1 -->
-                <div class="bg-[#111111] border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/40 transition-all group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-baseline mb-3">
-                            <h3 class="text-xl font-serif-luxury text-white">Wagyu A5 Tenderloin</h3>
-                            <span class="text-amber-400 font-semibold">$145</span>
-                        </div>
-                        <p class="text-neutral-400 text-sm font-light">Truffle jus, smoked bone marrow, black garlic reduction & wild chanterelles.</p>
-                    </div>
-                </div>
-
-                <!-- Dish Card 2 -->
-                <div class="bg-[#111111] border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/40 transition-all group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=600" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-baseline mb-3">
-                            <h3 class="text-xl font-serif-luxury text-white">Brittany Lobster Tail</h3>
-                            <span class="text-amber-400 font-semibold">$120</span>
-                        </div>
-                        <p class="text-neutral-400 text-sm font-light">Saffron bisque, sea fennel, glazed baby turnips & caviar emulsion.</p>
-                    </div>
-                </div>
-
-                <!-- Dish Card 3 -->
-                <div class="bg-[#111111] border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/40 transition-all group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-baseline mb-3">
-                            <h3 class="text-xl font-serif-luxury text-white">Golden Valrhona Sphere</h3>
-                            <span class="text-amber-400 font-semibold">$45</span>
-                        </div>
-                        <p class="text-neutral-400 text-sm font-light">Dark chocolate dome, edible 24k gold, passionfruit coulis & hazelnut praline.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="menu.html" class="inline-block border-b border-amber-400 text-amber-400 text-xs font-semibold uppercase tracking-widest pb-1 hover:text-white hover:border-white transition-colors">
-                    View Full Tasting Menu <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
-                </a>
+            <div class="bg-[#14141C] p-6 rounded-2xl border border-white/5">
+                <h3 class="text-lg font-bold text-white mb-2">هل يتطلب الحجز المسبق؟</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">يفضل دائماً الحجز المسبق لتأكيد الطاولة خصوصاً في عطلة نهاية الأسبوع عبر رقم الواتساب: 01025134834.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-neutral-900 bg-[#070707] py-16 text-neutral-400 text-sm">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
-            <div>
-                <h4 class="text-lg font-serif-luxury text-amber-400 mb-4 uppercase">L'Étoile Noir</h4>
-                <p class="font-light text-neutral-500 text-xs leading-relaxed">Haute Gastronomie & Fine Dining Experience.</p>
-            </div>
-            <div>
-                <h5 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Location</h5>
-                <p class="font-light text-xs leading-relaxed">742 Fifth Avenue, Manhattan<br>New York, NY 10019</p>
-            </div>
-            <div>
-                <h5 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Hours</h5>
-                <p class="font-light text-xs">Tue - Sun: 5:00 PM - 11:30 PM</p>
-                <p class="font-light text-xs text-amber-400/80 mt-1">Monday: Closed</p>
-            </div>
-            <div>
-                <h5 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Contact</h5>
-                <p class="font-light text-xs">+1 (212) 555-0199</p>
-                <p class="font-light text-xs mt-1">reservations@letoilenoir.com</p>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-neutral-900 text-center text-xs text-neutral-600">
-            &copy; 2026 L'Étoile Noir Restaurant. All Rights Reserved.
-        </div>
+    <footer class="bg-[#08080C] py-12 border-t border-white/5 text-center text-xs text-neutral-500">
+        <p class="text-white font-bold text-xl mb-2 font-brand">NOIR & FIRE</p>
+        <p class="mb-2">جميع الحقوق محفوظة &copy; 2026</p>
+        <p class="text-neutral-400">للحجز والاستفسار: <span class="text-[#FF6B35] font-bold">01025134834</span></p>
     </footer>
 
     <script>
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-drawer').classList.toggle('hidden');
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-nav').classList.toggle('hidden');
         });
     </script>
 </body>
